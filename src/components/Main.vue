@@ -73,12 +73,12 @@ export default {
       <!-- <section id="video" class="content-section">
         <Video/>
       </section> -->
-      <section id="abstract" class="content-section">
+      <!-- <section id="abstract" class="content-section">
         <Abstract/>
       </section>
       <section id="markdown" class="content-section">
         <Markdown/>
-      </section>
+      </section> -->
       <!-- <section id="latex" class="content-section">
         <Latex/>
       </section>

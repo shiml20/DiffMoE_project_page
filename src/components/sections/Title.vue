@@ -7,7 +7,7 @@ import { Document, Files } from '@element-plus/icons-vue'
 const logo = ''
 
 // 标题 - 不需要，因为在logo中
-const title = 'Latent Diffusion Model Without Variational Autoencoder'
+const title = 'DiffMoE'
 
 // 按钮链接
 const buttons = [
