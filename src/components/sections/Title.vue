@@ -128,7 +128,7 @@ const affiliations = [
 
     <!-- Logo -->
     <div class="logo-container">
-      <img :src="logo" alt="DiffMoE Logo" class="logo" />
+      <img :src="logo" alt="DiffMoE logo" class="logo" />
     </div>
 
     <!-- Paper Title -->
