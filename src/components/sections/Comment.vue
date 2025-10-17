@@ -49,7 +49,7 @@ export default {
     </el-row>
     
     <el-row justify="center">
-      <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="12" >
+      <el-col :xs="24" :sm="23" :md="22" :lg="21" :xl="20" >
         <div id="twikoo"></div>
       </el-col>
     </el-row>

@@ -1,53 +1,25 @@
-# Markdown (H1)
+# Introduction
 
-The render result of `md.mdx` is here.
+Generative models have made remarkable progress in recent years, with diffusion models emerging as a dominant paradigm. They have attracted substantial attention and demonstrated broad applicability across diverse scenarios, including text-to-image generation, text-to-video generation, and beyond. Due to the inherently high-dimensional nature of visual data, training diffusion models directly at the pixel level remains challenging. To address this, mainstream approaches rely on pretrained variational autoencoders to compress raw visual data into a compact latent space, on which diffusion models are subsequently trained.
 
-## Good (H2)
+Despite their success, the VAE+Diffusion paradigm exhibits several critical limitations. First, both training and inference are computationally expensive: for instance, training an ImageNet 256×256 generation model with the standard DiT implementation requires 7M steps, and inference typically demands more than 25 sampling steps to achieve satisfactory results. Although some recent methods attempt to accelerate diffusion training by aligning with external feature spaces of vision foundation models or imposing regularization constraints on the VAE latent space, these approaches provide only ad hoc fixes, as they do not fundamentally alter the VAE training objective or the resulting latent space structure, which inherently lacks semantic separability. Importantly, VAE latent representations are generally not employed in modern multi-modal large models, and their restricted perceptual capabilities highlight a fundamental limitation. This discrepancy implies that VAE latents are unlikely to serve effectively as unified visual representations.
+In this paper, we argue that a discriminative semantic structure in the latent space can substantially facilitate the training of diffusion models. By leveraging the powerful self-supervised features from DINOv3, we demonstrate that it is possible to construct a feature space that enables efficient diffusion training in a simple yet effective way, while fully retaining DINOv3's strengths beyond generation.
 
-### Nice (H3)
+We start by analyzing the semantic distributions of various VAE latent spaces to examine the limitations of the conventional VAE+Diffusion paradigm. Our study indicates that semantic entanglement in the vanilla VAE latents is a major obstacle to efficient diffusion. This observation leads to two key insights: first, VAE latents may not be optimal for latent diffusion models; second, since visual perception and understanding tasks also benefit from semantically structured representations, it is feasible to design a single unified feature space that simultaneously supports all core vision tasks.
+Specifically, we examine several state-of-the-art visual representations in terms of image reconstruction, perception, and semantic understanding. We find that DINOv3 features offer the greatest potential as a unified feature space, as they preserve substantial coarse-grained image information and inherently exhibit strong semantic discriminability. To further enhance generation quality, we augment the frozen DINOv3 encoder with a lightweight Residual Encoder that captures the missing fine-grained perceptual details. The residual outputs are concatenated with the DINOv3 features along the channel dimension to enrich the representation, and subsequently aligned with the original DINOv3 feature distribution to preserve semantic structure. The resulting SVG feature space combines strong semantic discriminability with rich perceptual detail, leading to more efficient training of diffusion models, improved generative quality, and enhanced inference efficiency.
 
-[**Diffusion models**](https://lilianweng.github.io/posts/2021-07-11-diffusion-models/) are a class of generative models in machine learning that have gained significant attention in recent years. 
+We highlight the following significant contributions of this paper:
 
-**Text-to-image diffusion models** have various application scenarios, including:
+- We systematically analyze the limitations of mainstream VAE latent spaces in latent diffusion models, highlighting how
 
-- **Art & Design**: Used by artists for creative art and fashion designers to generate clothing renderings.
-- **Advertising & Marketing**: Helps in creating advertising posters and product promotion maps.
-- **Game & Film**: Applied in game scene and character design, as well as film and television concept design...
+- We propose SVG, a latent diffusion model without variational autoencoders, built upon a unified feature space that retains the potential to support multiple core vision tasks beyond generation.
 
-> Thegeneral training steps of diffusion models are as follows:
+- SVG Diffusion achieves impressive generative quality while ensuring rapid training and highly efficient inference.
 
-1. Data collection
-2. Noise addition
-3. Model building
-4. Training
-5. Evaluation
-6. Deployment
+## Motivation
 
+## Method Overview
 
-```
-import torch 
+## Key Results
 
-def denoise():
-    pass
-```
-
-* [ ] to do
-* [x] done
-* [x] ~114514~
-
-![](./logo_vision_aigc.png)
-
-Lift ($$L$$) can be determined by Lift Coefficient ($$C_L$$) like the following
-equation.
-
-$$
-L = \frac{1}{2} \rho v^2 S C_L
-$$
-
-
-### Table (H3)
-
-| a       | b       | c     |  d      |
-| -       | :-      | -:    | :-:     |
-| Alpha   | Bravo   | Alpha | Bravo   |
-| 中文    | Charlie | 👩‍❤️‍👩    | Delta   |
+## Conclusion

@@ -9,66 +9,102 @@ export default {
     Header,
     Main,
     Footer,
+  },
+  data() {
+    return {
+      showBackToTop: false
+    }
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll)
+  },
+  methods: {
+    handleScroll() {
+      this.showBackToTop = window.scrollY > 300
+    },
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
   }
 }
 
 </script>
 
 <template>
-    <div>
+    <div class="app-wrapper">
+      <!-- <Header/> -->
+      <Main/>
+      <!-- <Footer/> -->
       
-      <el-container>
-        <el-header><Header/></el-header>
-        <el-main><Main/></el-main>
-        <el-footer><Footer/></el-footer>
-      </el-container>
-      
-      <!-- 回到顶部 -->
-      <el-backtop :right="40" :bottom="80" />
+      <!-- 回到顶部按钮 -->
+      <button 
+        class="back-to-top" 
+        @click="scrollToTop"
+        v-show="showBackToTop"
+      >
+        ↑
+      </button>
     </div>
 </template>
 
 <style>
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
 h1 {
-  font-family: "MyFont", Verdana, sans-serif;
-  letter-spacing: 2px;
-  font-size: 28px;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.5px;
+  font-size: 32px;
+  font-weight: 400;
   margin: 0px;
   text-align: center;
+  color: #000000;
 }
 
 h2, h3, h4, h5, h6 {
-  font-family: "MyFont", Verdana, sans-serif;
-  letter-spacing: 2px;
-}
-
-.el-header {
-  padding: 0px;
-}
-
-.el-footer {
-  padding: 0px;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.3px;
+  font-weight: 400;
+  color: #1a1a1a;
 }
 
 p, li {
-  font-size: 16px;
-  line-height: 1.75rem;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #333333;
 }
 
 code {
-  font-family: 'Consolas', monospace;
-  border-radius: 5px;
-  padding: 2px 5px;
-  background: #f2f2f2;
-  color: black;
+  font-family: 'Monaco', 'Consolas', monospace;
+  border-radius: 3px;
+  padding: 2px 6px;
+  background: #f6f6f6;
+  color: #24292e;
+  font-size: 0.9em;
 }
 
 pre {
-  border-radius: 5px;
-  padding: 10px;
-  background: #f2f2f2;
-  line-height: 1.4rem;
+  border-radius: 4px;
+  padding: 16px;
+  background: #f6f6f6;
+  line-height: 1.5;
+  color: #24292e;
+  border: 1px solid #e1e4e8;
 }
 
 pre:not(pre[id=bibtex]) {
@@ -76,17 +112,19 @@ pre:not(pre[id=bibtex]) {
 }
 
 pre code {
-  font-size: 16px;
-  color: black;
+  font-size: 14px;
+  color: #24292e;
   border: none;
   padding: 0px;
+  background: transparent;
 }
 
 blockquote {
-  border-left: 5px solid #bcbcbc;
-  padding: 10px 20px 10px 20px;
-  margin: 0px;
-  background: #f6f6f6;
+  border-left: 3px solid #d0d7de;
+  padding: 12px 24px;
+  margin: 16px 0;
+  background: #f6f8fa;
+  color: #24292e;
 }
 
 blockquote > p {
@@ -96,22 +134,22 @@ blockquote > p {
 
 /* 链接颜色装饰 */
 a {
-  color: #3273dc;
+  color: #0969da;
   text-decoration: none;
 }
 
 /* 鼠标焦点悬浮在链接上的颜色装饰 */
 a:hover {
-  color: #848484;
-  border-bottom: dotted;
+  color: #0550ae;
+  text-decoration: underline;
 }
 
 p > img {
   width: 80%;
   display: block;
   margin: 0 auto;
-  border-radius: 10px;
-  box-shadow: 1px 1px 4px 1px #afafaf;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 table {
@@ -121,24 +159,25 @@ table {
   margin: 0 auto;
   display:block;
   overflow-x:auto;
+  background-color: #ffffff;
 }
 
 thead {
   border-bottom-width: 1px;
-  border-top-width: 2px;
+  border-top-width: 1px;
   border-left-width: 0px;
   border-right-width: 0px;
   border-style: solid;
-  border-color: rgb(0 0 0);
+  border-color: #d0d7de;
 }
 
 tbody tr:last-child {
-  border-bottom-width: 2px;
+  border-bottom-width: 1px;
   border-top-width: 0px;
   border-left-width: 0px;
   border-right-width: 0px;
   border-style: solid;
-  border-color: rgb(0 0 0);
+  border-color: #d0d7de;
 }
 
 th, td {
@@ -149,6 +188,55 @@ th, td {
 .katex-display {
   overflow-x: auto;
   overflow-y: hidden;
+}
+
+/* Divider styling */
+.divider {
+  border: 0;
+  border-top: 1px solid #d0d7de;
+  margin: 24px 0;
+}
+
+/* Section title styling */
+.section-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin: 24px 0;
+}
+
+/* App wrapper */
+.app-wrapper {
+  min-height: 100vh;
+}
+
+/* 回到顶部按钮 */
+.back-to-top {
+  position: fixed;
+  right: 40px;
+  bottom: 80px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  color: #1a1a1a;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.back-to-top:hover {
+  background: #f6f8fa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.back-to-top:active {
+  transform: translateY(0);
 }
 
 </style>

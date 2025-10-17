@@ -3,14 +3,23 @@ import page from '../mds/md.mdx';
 </script>
 
 <template>
-  <div>
-    <el-divider />
+  <div class="markdown-wrapper">
+    <hr class="divider" />
 
-    <el-row justify="center">
-        <el-col :xs="24" :sm="20" :md="16" :lg="12" :xl="12">
-            <page />
-        </el-col>
-    </el-row>
+    <div class="section-content">
+      <page />
+    </div>
 
   </div>
 </template>
+
+<style scoped>
+.markdown-wrapper {
+  margin: 0;
+}
+
+.section-content {
+  max-width: 100%;
+  margin: 0 auto;
+}
+</style>

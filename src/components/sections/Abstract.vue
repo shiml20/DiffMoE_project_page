@@ -4,17 +4,18 @@ import abstract from '../mds/abstract.mdx';
 
 <template>
   <div>
-    <el-divider />
+    <hr class="divider" />
 
-    <el-row justify="center">
-        <el-col :xs="24" :sm="20" :md="16" :lg="12" :xl="12">
-            <abstract />
-        </el-col>
-    </el-row>
+    <div class="section-content">
+      <abstract />
+    </div>
 
   </div>
 </template>
 
 <style scoped>
-
+.section-content {
+  max-width: 100%;
+  margin: 0 auto;
+}
 </style>

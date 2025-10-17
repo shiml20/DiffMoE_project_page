@@ -9,7 +9,7 @@
     </el-row>
 
     <el-row justify="center">
-        <el-col :xs="24" :sm="20" :md="16" :lg="12" :xl="12">
+        <el-col :xs="24" :sm="23" :md="22" :lg="21" :xl="20">
 
             <!-- 折叠列表 -->
             <el-collapse model-value="1" class="collapse" accordion >

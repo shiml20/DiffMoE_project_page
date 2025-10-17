@@ -12,7 +12,7 @@ import { vue3dLoader } from "vue-3d-loader";
     </el-row>
 
     <el-row justify="center">
-      <el-col :xs="24" :sm="20" :md="16" :lg="12" :xl="12">
+      <el-col :xs="24" :sm="23" :md="22" :lg="21" :xl="20">
         <p>
         Thanks to
         <a href="https://github.com/king2088/vue-3d-loader" target="_blank">vue-3d-loader</a>,

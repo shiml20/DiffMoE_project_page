@@ -7,27 +7,39 @@ const outputImagePath = './image_inner/real.jpg';
 
 <template>
   <div>
-    <el-divider />
+    <hr class="divider" />
 
-    <el-row justify="center">
-      <h1 class="section-title">Image Inner Comparison</h1>
-    </el-row>
+    <div class="section-header">
+      <h1 class="section-title">Qualitative Results</h1>
+    </div>
 
-    <el-row justify="center">
-        <el-col :xs="24" :sm="20" :md="16" :lg="12" :xl="12">
-            <el-row style="margin-top: 20px;" >
-                <VueCompareImage 
-                    :left-image="inputImagePath" 
-                    :right-image="outputImagePath"
-                    :hover="true"
-                />
-            </el-row>
-        </el-col>
-    </el-row>
+    <div class="image-comparison-container">
+      <div class="comparison-wrapper">
+        <VueCompareImage 
+          :left-image="inputImagePath" 
+          :right-image="outputImagePath"
+          :hover="true"
+        />
+      </div>
+    </div>
 
   </div>
 </template>
 
 <style scoped>
+.section-header {
+  text-align: center;
+}
 
+.image-comparison-container {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.comparison-wrapper {
+  margin-top: 20px;
+  width: 100%;
+}
 </style>

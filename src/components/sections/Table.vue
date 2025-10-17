@@ -39,7 +39,7 @@ const tableData = [
         
         <!-- 数据表格 -->
         <el-row justify="center">
-            <el-col :xs="24" :sm="20" :md="16" :lg="12" :xl="12">
+            <el-col :xs="24" :sm="23" :md="22" :lg="21" :xl="20">
 
                 <!-- 卡片 -->
                 <el-card class="card">
@@ -88,4 +88,3 @@ const tableData = [
     margin-top: 20px;
 }
 </style>
-  

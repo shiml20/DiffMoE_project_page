@@ -35,7 +35,8 @@ const links = {
 
 /* 页脚背景 */
 .bg {
-  background-color: rgb(235, 235, 235);
+  background-color: #f6f8fa;
+  border-top: 1px solid #d0d7de;
 }
 
 /* 页脚文字 */
@@ -43,6 +44,17 @@ const links = {
   text-align: center;
   margin: 20px;
   z-index: 1;
+  color: #57606a;
+  font-size: 14px;
+}
+
+a {
+  color: #0969da;
+}
+
+a:hover {
+  color: #0550ae;
+  text-decoration: underline;
 }
 
 </style>

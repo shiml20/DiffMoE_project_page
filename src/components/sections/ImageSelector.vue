@@ -63,7 +63,7 @@ const handleChange = (value) => {
     </el-row>
 
     <el-row justify="center">
-      <el-col :xs="24" :sm="20" :md="16" :lg="12" :xl="12">
+      <el-col :xs="24" :sm="23" :md="22" :lg="21" :xl="20">
         <el-row justify="space-evenly" style="margin-top: 20px;">
           <el-col :span="4" v-for="(imageSeletorPath, index) in imageSeletorPaths" :key="index">
             <el-image 

@@ -3,13 +3,14 @@ export default {
   data() {
     return {
       bibtex: [
-        "@article{junyaohu2023template,",
-        "    title={Academic Project Page Template Vue},",
-        "    author={Hu, Junyao},",
-        "    journal={GitHub},",
-        "    year={2023}",
+        "@inproceedings{svg2026,",
+        "    title={SVG: Scalable Vector Generation for High-Quality Images},",
+        "    author={Author One and Author Two and Author Three and Author Four},",
+        "    booktitle={International Conference on Learning Representations (ICLR)},",
+        "    year={2026}",
         "}",
       ],
+      copyMessage: ''
     }
   },
   methods: {
@@ -20,8 +21,11 @@ export default {
       document.body.appendChild(oInput);
       oInput.select();
       document.execCommand('Copy');
-      this.$message.success('Copy Successfully');
+      this.copyMessage = 'Copied!';
       oInput.remove();
+      setTimeout(() => {
+        this.copyMessage = '';
+      }, 2000);
     }
   }
 }
@@ -30,48 +34,81 @@ export default {
 
 <template>
   <div>
-    <el-divider />
+    <hr class="divider" />
       
-      <el-row justify="center">
-        <h1 class="section-title">BibTeX</h1>
-      </el-row>
-      
-      <el-row justify="center">
-        <el-col class='bibtex' :xs="24" :sm="20" :md="14" :lg="12" :xl="12" @click="copyVal()" >
-          <div style="text-align: center; color: var(--el-text-color-secondary); margin-top: 20px;">🖱️ Click here to copy BibTex.</div> 
-          <el-row>
-              <el-scrollbar style="margin: 0px 20px 5px 20px;">
-                <pre id="bibtex"><code v-for="b in bibtex">{{ b }}<br/></code></pre>
-              </el-scrollbar>
-          </el-row>
-        </el-col>
-      </el-row>
+    <div class="section-header">
+      <h1 class="section-title">BibTeX</h1>
+    </div>
+    
+    <div class="bibtex-container">
+      <div class='bibtex' @click="copyVal()">
+        <div class="copy-hint">
+          🖱️ Click here to copy BibTeX.
+          <span v-if="copyMessage" class="copy-success">{{ copyMessage }}</span>
+        </div>
+        <div class="code-wrapper">
+          <pre id="bibtex"><code v-for="b in bibtex" :key="b">{{ b }}<br/></code></pre>
+        </div>
+      </div>
+    </div>
 
   </div>
 </template>
 
 <style scoped>
 
-.scrollbar-flex-content {
+.section-header {
+  text-align: center;
+}
+
+.bibtex-container {
   display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 800px;
 }
 
 /* 卡片属性 */
 .bibtex {
   margin: 20px 0px;
   padding-top: 5px;
-  box-shadow: var(--el-box-shadow-light); 
-  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  border: none;
 }
 
 /* 卡片悬浮 */
 .bibtex:hover {
-  box-shadow: var(--el-box-shadow); 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }
 
 /* 卡片点击 */
 .bibtex:active{
-  box-shadow: var(--el-box-shadow-lighter); 
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  transform: translateY(0);
+}
+
+.copy-hint {
+  text-align: center;
+  color: #57606a;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.copy-success {
+  color: #0969da;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.code-wrapper {
+  margin: 0px 20px 5px 20px;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 pre {
@@ -82,10 +119,8 @@ pre {
 }
 
 pre code {
-  font-size: 18px;
+  font-size: 16px;
   background: #ffffff;
 }
-
-
 
 </style>
