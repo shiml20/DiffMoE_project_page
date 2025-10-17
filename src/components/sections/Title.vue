@@ -4,7 +4,7 @@ import { Document, Files } from '@element-plus/icons-vue'
 
 // logo地址 - SVG logo
 // const logo = 'svg/src/assets/logo.svg'
-const logo = 'public/images/logo.png'
+const logo = './images/logo.png'
 
 // 标题 - 不需要，因为在logo中
 const title = 'DiffMoE: Dynamic Token Selection for Scalable Diffusion Transformers'
@@ -128,7 +128,7 @@ const affiliations = [
 
     <!-- Logo -->
     <div class="logo-container">
-      <img :src="logo" alt="SVG Logo" class="logo" />
+      <img :src="logo" alt="DiffMoE Logo" class="logo" />
     </div>
 
     <!-- Paper Title -->
