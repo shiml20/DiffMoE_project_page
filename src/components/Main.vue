@@ -43,7 +43,7 @@ export default {
         { label: 'Overview', href: '#overview' },
         { label: 'Abstract', href: '#abstract' },
         { label: 'Introduction', href: '#markdown' },
-        { label: 'Results', href: '#inner-slider' },
+        { label: 'Results', href: '#markdown' },
         { label: 'Citation', href: '#bibtex' },
       ]
     }
