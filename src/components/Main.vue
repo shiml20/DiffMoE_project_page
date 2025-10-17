@@ -42,8 +42,7 @@ export default {
       navItems: [
         { label: 'Overview', href: '#overview' },
         { label: 'Abstract', href: '#abstract' },
-        { label: 'Introduction', href: '#markdown' },
-        { label: 'Results', href: '#markdown' },
+        { label: 'Main Content', href: '#markdown' },
         { label: 'Citation', href: '#bibtex' },
       ]
     }
