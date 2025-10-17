@@ -73,12 +73,14 @@ export default {
       <!-- <section id="video" class="content-section">
         <Video/>
       </section> -->
-      <!-- <section id="abstract" class="content-section">
+      <section id="abstract" class="content-section">
         <Abstract/>
       </section>
+
       <section id="markdown" class="content-section">
         <Markdown/>
-      </section> -->
+
+      </section>
       <!-- <section id="latex" class="content-section">
         <Latex/>
       </section>
@@ -100,9 +102,9 @@ export default {
       <!-- <section id="comparison" class="content-section">
         <SeletionForComparison/>
       </section> -->
-      <section id="inner-slider" class="content-section">
+      <!-- <section id="inner-slider" class="content-section">
         <ImageSliderInner/>
-      </section>
+      </section> -->
       <!-- <section id="outer-slider" class="content-section">
         <ImageSlider/>
       </section> -->

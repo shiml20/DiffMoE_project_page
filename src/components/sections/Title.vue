@@ -4,28 +4,27 @@ import { Document, Files } from '@element-plus/icons-vue'
 
 // logo地址 - SVG logo
 // const logo = 'svg/src/assets/logo.svg'
-const logo = ''
+const logo = 'public/images/logo.png'
 
 // 标题 - 不需要，因为在logo中
-const title = 'Latent Diffusion Model Without Variational Autoencoder'
+const title = 'DiffMoE: Dynamic Token Selection for Scalable Diffusion Transformers'
 
 // 按钮链接
 const buttons = [
   {
     disabled: false,
     name: "arXiv",
-    link: "https://huggingface.co/papers/xxx",
+    link: "https://huggingface.co/papers/2503.14487",
     component: Document,
   },
   {
     disabled: false,
     name: "Code",
-    link: "https://xxx/",
+    link: "https://github.com/KwaiVGI/DiffMoE.git",
     component: Files,
   },
 ]
 
-// 作者信息
 const authors = [
   {
     name: "Minglei Shi",
@@ -34,39 +33,45 @@ const authors = [
     marker: "*"
   },
   {
-    name: "Haolin Wang",
-    homepage: "https://howlin-wang.github.io",
+    name: "Ziyang Yuan",
+    homepage: "https://scholar.google.com/citations?user=fWxWEzsAAAAJ&hl=en",
     affiliation: "1",
     marker: "*"
   },
   {
-    name: "Wenzhao Zheng",
-    homepage: "https://wzzheng.net",
-    affiliation: "1",
-    marker: "†"
-  },
-  {
-    name: "Ziyang Yuan",
-    homepage: "https://scholar.google.ru/citations?user=fWxWEzsAAAAJ&hl=en",
-    affiliation: "2",
-    marker: ""
-  },
-  {
-    name: "Xiaoshi Wu",
-    homepage: "https://scholar.google.com/citations?user=cnOAMbUAAAAJ&hl=en",
+    name: "Haotian Yang",
+    homepage: "https://scholar.google.com/citations?user=LH71RGkAAAAJ&hl=en",
     affiliation: "2",
     marker: ""
   },
   {
     name: "Xintao Wang",
-    homepage: "https://xinntao.github.io",
+    homepage: "https://xinntao.github.io/",
+    affiliation: "2",
+    marker: "†"
+  },
+  {
+    name: "Mingwu Zheng",
+    homepage: "https://scholar.google.com.hk/citations?user=MdizB60AAAAJ&hl=en",
     affiliation: "2",
     marker: ""
   },
   {
-    name: "Pengfei Wan",
-    homepage: "https://scholar.google.com/citations?user=P6MraaYAAAAJ&hl=en",
+    name: "Xin Tao",
+    homepage: "https://www.xtao.website/",
     affiliation: "2",
+    marker: ""
+  },
+  {
+    name: "Wenliang Zhao",
+    homepage: "https://wl-zhao.github.io/",
+    affiliation: "1",
+    marker: ""
+  },
+  {
+    name: "Wenzhao Zheng",
+    homepage: "https://wzzheng.net",
+    affiliation: "1",
     marker: ""
   },
   {
@@ -77,14 +82,32 @@ const authors = [
   },
   {
     name: "Jiwen Lu",
-    homepage: "https://www.au.tsinghua.edu.cn/info/1078/3156.htm",
+    homepage: "https://scholar.google.com/citations?user=TN8uDQoAAAAJ&hl=en",
     affiliation: "1",
+    marker: "†"
+  },
+  {
+    name: "Pengfei Wan",
+    homepage: "https://scholar.google.com/citations?user=P6MraaYAAAAJ&hl=en",
+    affiliation: "2",
+    marker: ""
+  },
+  {
+    name: "Di Zhang",
+    homepage: "https://openreview.net/profile?id=~Di_ZHANG3",
+    affiliation: "2",
+    marker: ""
+  },
+  {
+    name: "Kun Gai",
+    homepage: "https://scholar.google.com/citations?user=PXO4ygEAAAAJ&hl=zh-CN",
+    affiliation: "2",
     marker: ""
   },
 ]
 
 // 作者注释
-const authorNote = "(*equal contribution, listed alphabetically; †project lead)"
+const authorNote = "(*equal contribution, †corresponding author lead)"
 
 // 机构信息
 const affiliations = [
@@ -104,9 +127,9 @@ const affiliations = [
   <div class="title-section">
 
     <!-- Logo -->
-    <!-- <div class="logo-container">
+    <div class="logo-container">
       <img :src="logo" alt="SVG Logo" class="logo" />
-    </div> -->
+    </div>
 
     <!-- Paper Title -->
     <h1 class="paper-title">{{ title }}</h1>
@@ -147,6 +170,10 @@ const affiliations = [
       </div>
     </div>
 
+    <div>
+      We propose DiffMoE to efficiently scale the Diffusion Transformers, achieving 3x dense model performance with 1x active params.
+    </div>
+
   </div>
 </template>
 
@@ -164,7 +191,7 @@ const affiliations = [
 }
 
 .logo {
-  width: 120px;
+  width: 400px;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

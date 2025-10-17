@@ -3,12 +3,16 @@ export default {
   data() {
     return {
       bibtex: [
-        "@inproceedings{svg2026,",
-        "    title={SVG: Scalable Vector Generation for High-Quality Images},",
-        "    author={Author One and Author Two and Author Three and Author Four},",
-        "    booktitle={International Conference on Learning Representations (ICLR)},",
-        "    year={2026}",
-        "}",
+
+        "@misc{shi2025diffmoedynamictokenselection,",
+        "          title={DiffMoE: Dynamic Token Selection for Scalable Diffusion Transformers},",
+        "          author={Minglei Shi and Ziyang Yuan and Haotian Yang and Xintao Wang and Mingwu Zheng and Xin Tao and Wenliang Zhao and Wenzhao Zheng and Jie Zhou and Jiwen Lu and Pengfei Wan and Di Zhang and Kun Gai},",
+        "          year={2025},",
+        "          eprint={2503.14487},",
+        "          archivePrefix={arXiv},",
+        "          primaryClass={cs.CV},",
+        "          url={https://arxiv.org/abs/2503.14487}, ",
+        "          }"
       ],
       copyMessage: ''
     }

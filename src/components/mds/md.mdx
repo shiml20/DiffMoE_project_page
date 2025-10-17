@@ -1,25 +1,81 @@
 # Introduction
 
-Generative models have made remarkable progress in recent years, with diffusion models emerging as a dominant paradigm. They have attracted substantial attention and demonstrated broad applicability across diverse scenarios, including text-to-image generation, text-to-video generation, and beyond. Due to the inherently high-dimensional nature of visual data, training diffusion models directly at the pixel level remains challenging. To address this, mainstream approaches rely on pretrained variational autoencoders to compress raw visual data into a compact latent space, on which diffusion models are subsequently trained.
+    Diffusion models have demonstrated remarkable success in various image generation tasks, 
+    but their performance is often limited by the uniform processing of inputs across varying conditions and noise levels. 
+    To address this limitation, we propose a novel approach that leverages the inherent heterogeneity of the diffusion process. 
+    Our method, <strong>DiffMoE</strong>, introduces a <strong>batch-level global token pool</strong> that enables experts to access global token distributions during training, 
+    promoting specialized expert behavior. To unleash the full potential of the diffusion process, 
+    DiffMoE incorporates a <strong>capacity predictor</strong> that dynamically allocates computational resources based on noise levels and sample complexity. 
+    Through comprehensive evaluation,  DiffMoE  achieves state-of-the-art performance among diffusion models on ImageNet benchmark, 
+    substantially outperforming both dense architectures with 3x activated parameters and existing MoE approaches while maintaining 1x activated parameters. 
+    The effectiveness of our approach extends beyond class-conditional generation to more challenging tasks such as text-to-image generation, demonstrating its broad applicability across different diffusion model applications.  
 
-Despite their success, the VAE+Diffusion paradigm exhibits several critical limitations. First, both training and inference are computationally expensive: for instance, training an ImageNet 256×256 generation model with the standard DiT implementation requires 7M steps, and inference typically demands more than 25 sampling steps to achieve satisfactory results. Although some recent methods attempt to accelerate diffusion training by aligning with external feature spaces of vision foundation models or imposing regularization constraints on the VAE latent space, these approaches provide only ad hoc fixes, as they do not fundamentally alter the VAE training objective or the resulting latent space structure, which inherently lacks semantic separability. Importantly, VAE latent representations are generally not employed in modern multi-modal large models, and their restricted perceptual capabilities highlight a fundamental limitation. This discrepancy implies that VAE latents are unlikely to serve effectively as unified visual representations.
-In this paper, we argue that a discriminative semantic structure in the latent space can substantially facilitate the training of diffusion models. By leveraging the powerful self-supervised features from DINOv3, we demonstrate that it is possible to construct a feature space that enables efficient diffusion training in a simple yet effective way, while fully retaining DINOv3's strengths beyond generation.
 
-We start by analyzing the semantic distributions of various VAE latent spaces to examine the limitations of the conventional VAE+Diffusion paradigm. Our study indicates that semantic entanglement in the vanilla VAE latents is a major obstacle to efficient diffusion. This observation leads to two key insights: first, VAE latents may not be optimal for latent diffusion models; second, since visual perception and understanding tasks also benefit from semantically structured representations, it is feasible to design a single unified feature space that simultaneously supports all core vision tasks.
-Specifically, we examine several state-of-the-art visual representations in terms of image reconstruction, perception, and semantic understanding. We find that DINOv3 features offer the greatest potential as a unified feature space, as they preserve substantial coarse-grained image information and inherently exhibit strong semantic discriminability. To further enhance generation quality, we augment the frozen DINOv3 encoder with a lightweight Residual Encoder that captures the missing fine-grained perceptual details. The residual outputs are concatenated with the DINOv3 features along the channel dimension to enrich the representation, and subsequently aligned with the original DINOv3 feature distribution to preserve semantic structure. The resulting SVG feature space combines strong semantic discriminability with rich perceptual detail, leading to more efficient training of diffusion models, improved generative quality, and enhanced inference efficiency.
+# Method Overview
 
-We highlight the following significant contributions of this paper:
+    DiffMoE flattens tokens into a batch-level global token pool, where each expert maintains a fixed training capacity. 
+    During inference, a dynamic capacity predictor adaptively routes tokens across different sampling steps and conditions. 
+    Different colors denote tokens from distinct samples, while ti represents corresponding noise levels.
 
-- We systematically analyze the limitations of mainstream VAE latent spaces in latent diffusion models, highlighting how
+    <figure style={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+    }}>
+    <img src="./images/Method.png" alt="viz" height="400"  />
+    <figcaption>Fig 2: DiffMoE Architecture Overview. </figcaption>
+    </figure>
 
-- We propose SVG, a latent diffusion model without variational autoencoders, built upon a unified feature space that retains the potential to support multiple core vision tasks beyond generation.
 
-- SVG Diffusion achieves impressive generative quality while ensuring rapid training and highly efficient inference.
+# Experiments
 
-## Motivation
+**ImageNet Generation.** After 7000K steps, DiffMoE-L-E8 achieves FID50K scores of DDPM/Flow (2.30/2.13) with cfg=1.5, surpassing Dense-DiT-XL (2.32/2.19) as shown below. All evaluations follow DiT's protocol.
 
-## Method Overview
+<figure style={{
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center'
+}}>
+  <img src="./images/SOTA.png" alt="method" height="450" />
+  <figcaption>Fig 3: ImageNet Generation Results.</figcaption>
+</figure>
 
-## Key Results
+**Scaling Parameter Behavior.** To explore the upper limits of DiffMoE and quantify its performance efficiency, we scaled the model to larger sizes and trained them for 3000K steps. DiffMoE-L-E16-Flow achieves the best performance among the evaluated models. Notably, DiffMoE-L-E16 surpasses the performance of Dense-DiT-XXXL-Flow, which uses 3x the parameters, while operating with only 1x the parameters. This highlights the exceptional parameter efficiency and scalability of DiffMoE.
 
-## Conclusion
+<figure style={{
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center'
+}}>
+  <img src="./images/SOTA-2.png" alt="method" height="300" />
+  <figcaption>Fig 4: Scaling Parameter Behavior.</figcaption>
+</figure>
+
+# Visualization
+
+<figure style={{
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  marginBottom: '2rem'
+}}>
+  <img src="/images/viz-1.png" alt="visualization 1" width="600" />
+</figure>
+
+<figure style={{
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  marginBottom: '2rem'
+}}>
+  <img src="/images/viz-2.png" alt="visualization 2" width="600" />
+</figure>
+
+<figure style={{
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  marginBottom: '2rem'
+}}>
+  <img src="/images/viz-3.png" alt="visualization 3" width="600" />
+</figure>
